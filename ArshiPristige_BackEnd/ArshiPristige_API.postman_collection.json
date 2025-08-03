@@ -1,0 +1,1098 @@
+{
+	"info": {
+		"_postman_id": "arshipristige-api-collection",
+		"name": "ArshiPristige API",
+		"description": "Complete API collection for ArshiPristige - Client/Architect Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@arshipristige.com\",\n    \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					}
+				},
+				{
+					"name": "Register Client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"phone\": \"+1234567890\",\n    \"address\": \"123 Main St\",\n    \"city\": \"New York\",\n    \"country\": \"USA\",\n    \"postal_code\": \"10001\",\n    \"birth_date\": \"1990-01-01\",\n    \"gender\": \"male\",\n    \"company_name\": \"Doe Enterprises\",\n    \"company_size\": \"10-50\",\n    \"industry\": \"Technology\",\n    \"website\": \"https://doeenterprises.com\",\n    \"linkedin\": \"https://linkedin.com/in/johndoe\",\n    \"budget_range\": \"$50,000 - $100,000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/register/client",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"register",
+								"client"
+							]
+						}
+					}
+				},
+				{
+					"name": "Register Architect",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane@example.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\",\n    \"phone\": \"+1234567890\",\n    \"address\": \"456 Oak Ave\",\n    \"city\": \"Los Angeles\",\n    \"country\": \"USA\",\n    \"postal_code\": \"90210\",\n    \"birth_date\": \"1985-05-15\",\n    \"gender\": \"female\",\n    \"license_number\": \"ARC123456\",\n    \"years_of_experience\": 8,\n    \"specializations\": [\"residential\", \"commercial\"],\n    \"education\": [{\"degree\": \"Master of Architecture\", \"institution\": \"MIT\", \"year\": 2010}],\n    \"hourly_rate\": 150,\n    \"portfolio_url\": \"https://janesmith.com\",\n    \"linkedin\": \"https://linkedin.com/in/janesmith\",\n    \"website\": \"https://janesmith.com\",\n    \"verification_documents\": []\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/register/architect",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"register",
+								"architect"
+							]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					}
+				},
+				{
+					"name": "Check Auth Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth-status"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Public Endpoints",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/projects?per_page=10&status=open",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "open"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Projects",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/projects/featured",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"featured"
+							]
+						}
+					}
+				},
+				{
+					"name": "Search Projects",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/projects/search?q=residential&category_id=1&project_type=residential&location=New York&budget_min=50000&budget_max=100000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "residential"
+								},
+								{
+									"key": "category_id",
+									"value": "1"
+								},
+								{
+									"key": "project_type",
+									"value": "residential"
+								},
+								{
+									"key": "location",
+									"value": "New York"
+								},
+								{
+									"key": "budget_min",
+									"value": "50000"
+								},
+								{
+									"key": "budget_max",
+									"value": "100000"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Project by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Contact Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Contact User\",\n    \"email\": \"contact@example.com\",\n    \"subject\": \"General Inquiry\",\n    \"message\": \"I would like to know more about your services.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/contact",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"contact"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Client Endpoints",
+			"item": [
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Modern Residential House Design\",\n    \"description\": \"Looking for a modern 3-bedroom house design with open concept living area and sustainable features.\",\n    \"category_id\": 1,\n    \"budget_min\": 50000,\n    \"budget_max\": 100000,\n    \"deadline\": \"2025-12-31\",\n    \"location\": \"New York, NY\",\n    \"project_type\": \"residential\",\n    \"requirements\": [\"3 bedrooms\", \"open concept\", \"sustainable design\"],\n    \"tags\": [\"modern\", \"residential\", \"sustainable\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Client Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/client/projects?per_page=10&status=open",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "open"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Modern Residential House Design\",\n    \"description\": \"Updated description with additional requirements.\",\n    \"budget_max\": 120000,\n    \"requirements\": [\"3 bedrooms\", \"open concept\", \"sustainable design\", \"smart home features\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Accept Proposal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"accepted\",\n    \"client_notes\": \"Great proposal! Looking forward to working with you.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/proposals/1/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"proposals",
+								"1",
+								"status"
+							]
+						}
+					}
+				},
+				{
+					"name": "Reject Proposal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"rejected\",\n    \"rejection_reason\": \"Budget exceeds our requirements\",\n    \"client_notes\": \"Thank you for your proposal, but it's outside our budget range.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/proposals/1/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"proposals",
+								"1",
+								"status"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Client Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/client/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Client Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe Updated\",\n    \"phone\": \"+1234567891\",\n    \"address\": \"456 Updated St\",\n    \"city\": \"Los Angeles\",\n    \"company_name\": \"Doe Enterprises Updated\",\n    \"industry\": \"Real Estate\",\n    \"budget_range\": \"$100,000 - $200,000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/client/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"profile"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Architect Endpoints",
+			"item": [
+				{
+					"name": "Submit Proposal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Modern Sustainable Design Proposal\",\n    \"description\": \"I propose a modern 3-bedroom house with sustainable features including solar panels, rainwater harvesting, and energy-efficient design.\",\n    \"proposed_budget\": 85000,\n    \"estimated_duration\": 90,\n    \"delivery_date\": \"2025-11-30\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/projects/1/proposals",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"1",
+								"proposals"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Architect Proposals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/architect/proposals?per_page=10&status=pending",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"architect",
+								"proposals"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Architect Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/architect/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"architect",
+								"profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Architect Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jane Smith Updated\",\n    \"phone\": \"+1234567891\",\n    \"address\": \"789 Updated Ave\",\n    \"city\": \"San Francisco\",\n    \"years_of_experience\": 10,\n    \"specializations\": [\"residential\", \"commercial\", \"sustainable\"],\n    \"hourly_rate\": 175,\n    \"portfolio_url\": \"https://janesmith-updated.com\",\n    \"languages_spoken\": [\"English\", \"Spanish\"],\n    \"service_areas\": [\"California\", \"New York\", \"Texas\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/architect/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"architect",
+								"profile"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin Endpoints",
+			"item": [
+				{
+					"name": "Get All Architects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/architects?per_page=10&status=all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"architects"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "status",
+									"value": "all"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Clients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/clients?per_page=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Verify Architect",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"is_verified\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/architects/1/verify",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"architects",
+								"1",
+								"verify"
+							]
+						}
+					}
+				},
+				{
+					"name": "Reject Architect",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"is_verified\": false,\n    \"rejection_reason\": \"Incomplete documentation provided\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/architects/1/verify",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"architects",
+								"1",
+								"verify"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Healthcare Architecture\",\n    \"description\": \"Hospitals, clinics, and healthcare facilities\",\n    \"icon\": \"hospital\",\n    \"color\": \"#DC2626\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/categories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Healthcare & Medical Architecture\",\n    \"description\": \"Updated description for healthcare facilities\",\n    \"icon\": \"hospital-building\",\n    \"color\": \"#EF4444\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/categories/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/categories/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Admin Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/categories?per_page=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Admin Statistics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/statistics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"statistics"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Contacts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/contacts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"contacts"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete All Contacts",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/contacts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"contacts"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Admin Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/admin/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"profile"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Admin Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Admin User Updated\",\n    \"phone\": \"+1234567890\",\n    \"address\": \"123 Admin St\",\n    \"city\": \"Admin City\",\n    \"country\": \"USA\",\n    \"postal_code\": \"12345\",\n    \"bio\": \"Platform administrator\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/admin/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"profile"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Profile Management",
+			"item": [
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"current_password\": \"oldpassword\",\n    \"new_password\": \"newpassword123\",\n    \"new_password_confirmation\": \"newpassword123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile/password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"password"
+							]
+						}
+					}
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile/reset-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"reset-password"
+							]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "auth_token",
+			"value": "your_auth_token_here"
+		}
+	]
+} 

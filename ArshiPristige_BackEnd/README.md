@@ -1,66 +1,201 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ArshiPristige Backend API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based API for connecting clients with architects for architectural projects.
 
-## About Laravel
+## 🏗️ System Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ArshiPristige is a platform that connects:
+- **Clients** - who need architectural services
+- **Architects** - who provide architectural services  
+- **Admins** - who manage the platform
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 User Roles
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Client
+- Create and manage projects
+- Review and accept/reject proposals from architects
+- Manage profile and company information
 
-## Learning Laravel
+### Architect
+- Browse available projects
+- Submit proposals for projects
+- Manage portfolio and professional information
+- Requires admin verification before accessing the platform
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Admin
+- Verify architect accounts
+- Manage categories and projects
+- View platform statistics
+- Manage all users
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🚀 Getting Started
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Prerequisites
+- PHP 8.1+
+- Composer
+- PostgreSQL/MySQL
+- Laravel 10+
 
-## Laravel Sponsors
+### Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd ArshiPristige_BackEnd
+```
 
-### Premium Partners
+2. **Install dependencies**
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+3. **Environment setup**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+4. **Configure database**
+Edit `.env` file with your database credentials:
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=arshipristige
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Run migrations and seeders**
+```bash
+php artisan migrate:fresh --seed
+```
 
-## Code of Conduct
+6. **Start the server**
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The API will be available at `http://localhost:8000`
 
-## Security Vulnerabilities
+## 📋 API Endpoints
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Authentication
+- `POST /api/login` - User login
+- `POST /api/register/client` - Register as client
+- `POST /api/register/architect` - Register as architect
+- `POST /api/logout` - User logout (authenticated)
+- `GET /api/auth-status` - Check authentication status (authenticated)
 
-## License
+### Public Endpoints
+- `GET /api/projects` - Get all projects
+- `GET /api/projects/featured` - Get featured projects
+- `GET /api/projects/search` - Search projects
+- `GET /api/projects/{id}` - Get project by ID
+- `GET /api/categories` - Get all categories
+- `POST /api/contact` - Send contact message
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Client Endpoints (authenticated)
+- `POST /api/projects` - Create new project
+- `GET /api/client/projects` - Get client's projects
+- `PUT /api/projects/{id}` - Update project
+- `DELETE /api/projects/{id}` - Delete project
+- `PUT /api/proposals/{id}/status` - Accept/reject proposal
+- `GET /api/client/profile` - Get client profile
+- `PUT /api/client/profile` - Update client profile
+
+### Architect Endpoints (authenticated)
+- `POST /api/projects/{id}/proposals` - Submit proposal
+- `GET /api/architect/proposals` - Get architect's proposals
+- `GET /api/architect/profile` - Get architect profile
+- `PUT /api/architect/profile` - Update architect profile
+
+### Admin Endpoints (authenticated)
+- `GET /api/admin/architects` - Get all architects
+- `GET /api/admin/clients` - Get all clients
+- `PUT /api/admin/architects/{id}/verify` - Verify architect account
+- `POST /api/admin/categories` - Create category
+- `PUT /api/admin/categories/{id}` - Update category
+- `DELETE /api/admin/categories/{id}` - Delete category
+- `GET /api/admin/statistics` - Get platform statistics
+
+## 🔐 Authentication
+
+The API uses Laravel Sanctum for authentication. Include the bearer token in the Authorization header:
+
+```
+Authorization: Bearer {your-token}
+```
+
+## 📊 Database Schema
+
+### Users Table
+- Basic user information (name, email, password, role)
+- Profile data (phone, address, photo, etc.)
+
+### Clients Table
+- Company information
+- Business preferences
+- Verification status
+
+### Architects Table
+- Professional information (license, experience, specializations)
+- Portfolio and social links
+- Verification status and rating
+
+### Projects Table
+- Project details (title, description, budget, deadline)
+- Client and assigned architect
+- Status and category
+
+### Proposals Table
+- Architect proposals for projects
+- Budget and timeline estimates
+- Status (pending, accepted, rejected)
+
+### Categories Table
+- Project categories (Residential, Commercial, etc.)
+- Icons and colors for UI
+
+## 🧪 Testing
+
+### Default Users
+
+After seeding, the following users are available:
+
+**Admin**
+- Email: `admin@arshipristige.com`
+- Password: `admin123`
+
+**Test Users**
+- Email: `admin@example.com` / Password: `password`
+- Email: `architect@example.com` / Password: `password`
+- Email: `client@example.com` / Password: `password`
+
+## 🔧 Development
+
+### Adding New Features
+1. Create migrations for database changes
+2. Update models with relationships and fillable fields
+3. Create controllers for business logic
+4. Add routes with proper middleware
+5. Test endpoints
+
+### Code Style
+Follow Laravel conventions and PSR-12 coding standards.
+
+## 📝 License
+
+This project is proprietary software.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
+
+## 📞 Support
+
+For support, contact the development team.

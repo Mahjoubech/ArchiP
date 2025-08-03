@@ -5,86 +5,121 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Categorie;
+use App\Models\Category;
+
 class CategorieController extends Controller
 {
-    public function addCategorie(Request $request){
+    public function addCategorie(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'nom' => 'required|string',
-            'description' => 'required|string'
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'icon' => 'nullable|string|max:100',
+            'color' => 'nullable|string|max:20',
         ]);
 
-        if($validator->fails()){
-            return response()->json(["message" => "Erreur de validation","errors" => $validator->errors()], 422);
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => "Validation error",
+                "errors" => $validator->errors()
+            ], 422);
         }
 
-        try{
-            $categorie = Categorie::create($validator->validated());
-            return response()->json(["message" => "Categorie créé avec succès", "categorie" => $categorie], 201);
+        try {
+            $category = Category::create($validator->validated());
+            return response()->json([
+                "message" => "Category created successfully",
+                "category" => $category
+            ], 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erreur lors de la création de l\'événement', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Error creating category',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-
     }
 
     public function updateCategorie(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nom' => 'sometimes|required|string',
-            'description' => 'sometimes|required|string',
+            'name' => 'sometimes|required|string|max:255',
+            'description' => 'nullable|string',
+            'icon' => 'nullable|string|max:100',
+            'color' => 'nullable|string|max:20',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(["message" => "Erreur de validation", "errors" => $validator->errors()], 422);
+            return response()->json([
+                "message" => "Validation error",
+                "errors" => $validator->errors()
+            ], 422);
         }
 
         try {
-            $categorie = Categorie::findOrFail($id);
-            $categorie->update($request->only(['nom', 'description']));
+            $category = Category::findOrFail($id);
+            $category->update($validator->validated());
 
-            return response()->json(["message" => "Catégorie mise à jour avec succès", "categorie" => $categorie], 200);
+            return response()->json([
+                "message" => "Category updated successfully",
+                "category" => $category
+            ], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erreur lors de la mise à jour de la catégorie', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Error updating category',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
     public function deleteCategorie($id)
     {
         try {
-            $categorie = Categorie::findOrFail($id);
-            $categorie->delete();
+            $category = Category::findOrFail($id);
+            $category->delete();
 
-            return response()->json(["message" => "Catégorie supprimée avec succès"], 200);
+            return response()->json([
+                "message" => "Category deleted successfully"
+            ], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Erreur lors de la suppression de la catégorie', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Error deleting category',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
     public function getCategorie()
     {
         try {
-            $categorie = Categorie::Paginate(10);
-    
-            return response()->json(["categorie" => $categorie], 200);
+            $categories = Category::paginate(10);
+
+            return response()->json([
+                "message" => "Categories retrieved successfully",
+                "categories" => $categories
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Catégorie non trouvée',
+                'message' => 'Error retrieving categories',
                 'error' => $e->getMessage()
-            ], 404);
+            ], 500);
         }
     }
 
     public function getAllCategorie()
     {
         try {
-            $categorie = Categorie::All();
+            $categories = Category::active()->get();
 
-            return response()->json(["categorie" => $categorie], 200);
+            return response()->json([
+                "message" => "Categories retrieved successfully",
+                "categories" => $categories
+            ], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Catégorie non trouvée', 'error' => $e->getMessage()], 404);
+            return response()->json([
+                'message' => 'Error retrieving categories',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
-    
-
 }

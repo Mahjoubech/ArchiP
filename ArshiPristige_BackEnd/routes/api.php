@@ -2,100 +2,124 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-Use App\http\Controllers\AuthController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CategorieController;
-Use App\http\Controllers\OpportunitesController;
-Use App\http\Controllers\ContactController;
-use App\Http\Controllers\postuleController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CertificatController;
 use App\Http\Controllers\StatistiqueController;
 
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
+
+// Authentication routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register/client', [AuthController::class, 'registerClient']);
+Route::post('/register/architect', [AuthController::class, 'registerArchitect']);
+
+// Public project routes
+Route::get('/projects', [ProjectController::class, 'getAllProjects']);
+Route::get('/projects/featured', [ProjectController::class, 'getFeaturedProjects']);
+Route::get('/projects/search', [ProjectController::class, 'searchProjects']);
+Route::get('/projects/{id}', [ProjectController::class, 'getProjectById']);
+
+// Public category routes
+Route::get('/categories', [CategorieController::class, 'getAllCategorie']);
+
+// Contact route
+Route::post('/contact', [ContactController::class, 'sendMessage']);
+
+/*
+|--------------------------------------------------------------------------
+| Protected Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout',[AuthController::class,'logout']);
+    // Common authenticated routes
+    Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/auth-status', [AuthController::class, 'authStatus']);
     Route::put('/profile/password', [ProfileController::class, 'updatePassword']);
-    Route::Post('/profile/reset-password', [ProfileController::class, 'reset']);
+    Route::post('/profile/reset-password', [ProfileController::class, 'reset']);
 });
 
-Route::middleware(['auth:sanctum', 'role:association'])->group(function () {
-    Route::post('/dashboard/opportunite',[OpportunitesController::class,'addOpportunite']);
-    Route::get('/dashboard/profile', [ProfileController::class, 'getProfile']);
-    Route::post('/dashboard/profile/association/userInfo', [ProfileController::class, 'updateUserInfo']);
-    Route::post('/dashboard/profile/association/details', [ProfileController::class, 'updateAssociationDetails']);
-    Route::get('/dashboard/Myopportunites', [OpportunitesController::class, 'getOpportunitesByAssociation']);
-    Route::get('/dashboard/lastThreeOpportunites', [OpportunitesController::class, 'getLastThreeOpportunitesActives']);
-    Route::get('/dashboard/opportunite/{id}/postulations',[postuleController::class,'postulationByOpportunite']);
-    Route::get('/dashboard/opportunite/postulations',[postuleController::class,'getAllPostulationsByAssociation']);
-    Route::get('/dashboard/opportunite/benevole/{id}',[ProfileController::class,'getBenevoleData']);
-    Route::post('/dashboard/opportunite/{id}/certification/{benevole_id}',[CertificatController::class,'uploadCertificat']);
-    Route::get('/dashboard/opportunite/postulations/accepted',[CertificatController::class,'getAllPostulationsByAssociationAccpted']);
-    Route::get('/dashboard/opportunitess/Statistics', [StatistiqueController::class, 'getAssociationStatistics']);
+/*
+|--------------------------------------------------------------------------
+| Client Routes
+|--------------------------------------------------------------------------
+*/
 
-});
-
-Route::middleware(['auth:sanctum', 'role:association','CheckOpportuniteOwner'])->group(function () {
-    Route::post('/dashboard/opportunite/{id}',[OpportunitesController::class,'updateOpportunite']);
-    Route::delete('/dashboard/opportunite/{id}',[OpportunitesController::class,'deleteOpportunite']);
-    Route::put('/dashboard/opportunite/{id}/postulations/{benevole_id}', [PostuleController::class, 'changeStatusBenevole']);
-    Route::get('/dashboard/association/opportunites/{id}', [OpportunitesController::class, 'getOpportuniteAssocById']);
-
-});
-
-Route::middleware(['auth:sanctum', 'role:benevole'])->group(function () {
-    Route::post('/benevole/postulation/add/{id}', [postuleController::class, 'addPostulation']);
-    Route::delete('/opportunite/{id}', [postuleController::class, 'cancelPostulation']);
-    Route::get('/mespostulations', [postuleController::class, 'benevolePostulation']);
-    Route::get('/profile', [ProfileController::class, 'getProfile']);
-    Route::post('/profile/benevole/userInfo', [ProfileController::class, 'updateUserInfo']);
-    Route::post('/profile/benevole/details', [ProfileController::class, 'updateBenevoleDetails']);
-    Route::get('/profile/benevole/top3Opportunites', [postuleController::class, 'top3Opportunites']);
-    Route::get('/benevole/postulation/check/{id', [postuleController::class, 'hasAlreadyPostulated']);
-    Route::get('/benevole/Certififctaion', [CertificatController::class, 'getAllCertificationsForUser']);
-    Route::get('/benevole/Statistics', [StatistiqueController::class, 'getBenevoleStatistics']);
-
+Route::middleware(['auth:sanctum', 'role:client'])->group(function () {
+    // Project management
+    Route::post('/projects', [ProjectController::class, 'createProject']);
+    Route::get('/client/projects', [ProjectController::class, 'getClientProjects']);
+    Route::put('/projects/{id}', [ProjectController::class, 'updateProject']);
+    Route::delete('/projects/{id}', [ProjectController::class, 'deleteProject']);
     
-
+    // Proposal management
+    Route::put('/proposals/{id}/status', [ProjectController::class, 'updateProposalStatus']);
+    
+    // Profile management
+    Route::get('/client/profile', [ProfileController::class, 'getProfile']);
+    Route::put('/client/profile', [ProfileController::class, 'updateClientProfile']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Architect Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth:sanctum', 'role:architect'])->group(function () {
+    // Proposal management
+    Route::post('/projects/{id}/proposals', [ProjectController::class, 'submitProposal']);
+    Route::get('/architect/proposals', [ProjectController::class, 'getArchitectProposals']);
+    
+    // Profile management
+    Route::get('/architect/profile', [ProfileController::class, 'getProfile']);
+    Route::put('/architect/profile', [ProfileController::class, 'updateArchitectProfile']);
+    
+    // Portfolio management
+    Route::get('/architect/portfolio', [ProfileController::class, 'getPortfolio']);
+    Route::post('/architect/portfolio', [ProfileController::class, 'addPortfolioItem']);
+    Route::put('/architect/portfolio/{id}', [ProfileController::class, 'updatePortfolioItem']);
+    Route::delete('/architect/portfolio/{id}', [ProfileController::class, 'deletePortfolioItem']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
-    Route::post('dashboard/categories', [CategorieController::class, 'addCategorie']);
-    Route::put('dashboard/categories/{id}', [CategorieController::class, 'updateCategorie']);
-    Route::delete('dashboard/categories/{id}', [CategorieController::class, 'deleteCategorie']);
-    Route::get('dashboard/categories', [CategorieController::class, 'getCategorie']);
-    Route::post('/dashboard/profile/admin/userInfo', [ProfileController::class, 'updateUserInfo']);
-    Route::get('/dashboard/admin/Statistics', [StatistiqueController::class, 'getAdminStatistics']);
-    Route::put('/dashboard/admin/associations/{id}/status', [AuthController::class, 'changeStatusAssociation']);
-    Route::get('/dashboard/admin/associations', [AuthController::class, 'getAllAssociations']);
-    Route::get('/dashboard/admin/associations/details/{id}', [AuthController::class, 'getAssociationById']);
-    Route::put('/dashboard/admin/opportunites/{id}/status', [OpportunitesController::class, 'changeOpportunityStatus']);
-    Route::get('/dashboard/admin/opportunites/', [OpportunitesController::class, 'getAllOpportunities']);
-    Route::get('/dashboard/admin/profile', [ProfileController::class, 'getProfile']);
-    Route::get('/dashboard/admin/opportunites/{id}', [OpportunitesController::class, 'getOpportuniteAssocById']);
-    Route::get('/dashboard/admin/contacts/all', [ContactController::class, 'getAllMessages']);
-    Route::delete('/dashboard/admin/contacts/delete', [ContactController::class, 'deleteAllMessages']);
+    // User management
+    Route::get('/admin/architects', [AuthController::class, 'getAllArchitects']);
+    Route::get('/admin/clients', [AuthController::class, 'getAllClients']);
+    Route::put('/admin/architects/{id}/verify', [AuthController::class, 'verifyArchitect']);
     
+    // Category management
+    Route::post('/admin/categories', [CategorieController::class, 'addCategorie']);
+    Route::put('/admin/categories/{id}', [CategorieController::class, 'updateCategorie']);
+    Route::delete('/admin/categories/{id}', [CategorieController::class, 'deleteCategorie']);
+    Route::get('/admin/categories', [CategorieController::class, 'getCategorie']);
+    
+    // Project management
+    Route::get('/admin/projects', [ProjectController::class, 'getAllProjects']);
+    Route::put('/admin/projects/{id}/feature', [ProjectController::class, 'toggleFeatured']);
+    Route::delete('/admin/projects/{id}', [ProjectController::class, 'deleteProject']);
+    
+    // Statistics
+    Route::get('/admin/statistics', [StatistiqueController::class, 'getAdminStatistics']);
+    
+    // Contact management
+    Route::get('/admin/contacts', [ContactController::class, 'getAllMessages']);
+    Route::delete('/admin/contacts', [ContactController::class, 'deleteAllMessages']);
+    
+    // Profile management
+    Route::get('/admin/profile', [ProfileController::class, 'getProfile']);
+    Route::put('/admin/profile', [ProfileController::class, 'updateAdminProfile']);
 });
-
-Route::get('/opportunites', [OpportunitesController::class, 'getAllOpportunite']);
-Route::get('/opportunites/Top', [OpportunitesController::class, 'getTop3Opportunite']);
-Route::get('/opportunites/search', [OpportunitesController::class, 'searchOpportunites']);
-Route::get('/opportunites/type', [OpportunitesController::class, 'filterByTypes']);
-Route::get('/opportunites/populare', [OpportunitesController::class, 'getMostPopularOpportunites']);
-Route::get('/opportunites/recent', [OpportunitesController::class, 'getRecentOpportunites']);
-Route::get('/opportunites/{id}/similar', [OpportunitesController::class, 'getSimilarOpportunites']);
-
-
-
-
-
-
-Route::post('login',[AuthController::class,'login']);
-Route::post('/benevole',[AuthController::class,'registerBenevole']);
-Route::post('/association',[AuthController::class,'registerAssociation']);
-
-
-
-Route::get('/categorie', [CategorieController::class, 'getAllCategorie']);
-Route::post('/contact', [ContactController::class, 'sendMessage']);
-Route::get('/opportunites/{id}', [OpportunitesController::class, 'getOpportuniteById']);
