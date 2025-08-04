@@ -21,49 +21,20 @@
                                             scale-x-0 peer-checked:scale-x-100 transition-transform duration-300"></div>
                                 
                                 <div class="p-8">
-                                 <router-link :to="'/register-benevole/'">
-                                    
+                                    <router-link :to="'/register-benevole/'">
                                     <div class="flex items-center mb-6">
-                                        <div class="w-16 h-16 bg-gray-800/10 rounded-2xl flex items-center justify-center mr-4 
-                                                    transform rotate-3">
-                                            <i class="fas fa-home text-2xl text-gray-800"></i>
+                                        <div class="w-16 h-16 bg-gray-800/10 rounded-2xl flex items-center justify-center mr-4 transform rotate-3">
+                                            <i class="fas fa-user text-2xl text-gray-800"></i>
                                         </div>
                                         <div>
-                                            <h3 class="text-2xl font-bold text-gray-900">Client Particulier</h3>
+                                            <h3 class="text-2xl font-bold text-gray-900">Client</h3>
                                             <p class="text-gray-500">Compte Personnel</p>
                                         </div>
                                     </div>
-
-
                                     <p class="text-gray-600 mb-6 leading-relaxed">
                                         Transformez votre espace de vie avec nos services d'architecture d'intérieur personnalisés.
                                     </p>
-
-                                    <ul class="space-y-4">
-                                        <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-pencil-ruler text-gray-800"></i>
-                                            </div>
-                                            <span>Conception personnalisée de votre espace</span>
-                                        </li>
-                                        <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-star text-gray-800"></i>
-                                            </div>
-                                            <span>Suivi de projet professionnel</span>
-                                        </li>
-                                        <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-home text-gray-800"></i>
-                                            </div>
-                                            <span>Réalisation de votre espace de rêve</span>
-                                        </li>
-                                    </ul>
-
-                                    <div class="mt-8 flex items-center justify-between">
-                                        <span class="text-sm font-medium text-gray-500">Inscription gratuite</span>
-                                    </div>
-                                </router-link>
+                                    </router-link>
                                 </div>
                             </div>
                         </label>
@@ -80,45 +51,17 @@
                                 <div class="p-8">
                                     <router-link :to="'/register-association/'">
                                     <div class="flex items-center mb-6">
-                                        <div class="w-16 h-16 bg-gray-800/10 rounded-2xl flex items-center justify-center mr-4 
-                                                    transform -rotate-3">
-                                            <i class="fas fa-building text-2xl text-gray-800"></i>
+                                        <div class="w-16 h-16 bg-gray-800/10 rounded-2xl flex items-center justify-center mr-4 transform -rotate-3">
+                                            <i class="fas fa-drafting-compass text-2xl text-gray-800"></i>
                                         </div>
                                         <div>
-                                            <h3 class="text-2xl font-bold text-gray-900">Client Professionnel</h3>
-                                            <p class="text-gray-500">Compte Entreprise</p>
+                                            <h3 class="text-2xl font-bold text-gray-900">Architecte</h3>
+                                            <p class="text-gray-500">Compte Professionnel</p>
                                         </div>
                                     </div>
-
                                     <p class="text-gray-600 mb-6 leading-relaxed">
-                                        Bénéficiez de nos services d'architecture d'intérieur pour vos projets professionnels.
+                                        Rejoignez notre plateforme en tant qu'architecte d'intérieur professionnel.
                                     </p>
-                                    
-                                    <ul class="space-y-4">
-                                        <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-briefcase text-gray-800"></i>
-                                            </div>
-                                            <span>Projets commerciaux et bureaux</span>
-                                        </li>
-                                        <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-chart-line text-gray-800"></i>
-                                            </div>
-                                            <span>Suivi de chantier professionnel</span>
-                                        </li>
-                                        <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-handshake text-gray-800"></i>
-                                            </div>
-                                            <span>Partnership et collaboration</span>
-                                        </li>
-                                    </ul>
-
-                                    <div class="mt-8 flex items-center justify-between">
-                                        <span class="text-sm font-medium text-gray-500">Inscription gratuite</span>
-                                      
-                                    </div>
                                     </router-link>
                                 </div>
                             </div>

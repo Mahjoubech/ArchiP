@@ -224,11 +224,11 @@ export default {
           return;
         }
         
-        await profileApi.updatePassword({
+        await profileApi.updatePassword(token, {
           current_password: this.formData.current_password,
           password: this.formData.password,
           password_confirmation: this.formData.password_confirmation
-        }, token);
+        });
         
         this.success = true;
         this.successMessage = 'Le mot de passe a été modifié avec succès.';

@@ -3,23 +3,33 @@ import axios from 'axios';
 const api = 'http://127.0.0.1:8000/api';
 
 export default {
-    sendMessage(data) {
-        return axios.post(`${api}/contact`, data);
-    },
+  // Public contact
+  sendMessage(data) {
+    return axios.post(`${api}/contact`, data);
+  },
 
-    getAllMessages(token) {
-        return axios.get(`${api}/dashboard/admin/contacts/all`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-      },
-
-      deleteAllMessages(token) {
-        return axios.delete(`${api}/dashboard/admin/contacts/delete`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+  // Admin contact management
+  getAllMessages(token, page = 1) {
+    return axios.get(`${api}/admin/contacts?page=${page}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
       }
+    });
+  },
+
+  deleteMessage(token, id) {
+    return axios.delete(`${api}/admin/contacts/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+  },
+
+  deleteAllMessages(token) {
+    return axios.delete(`${api}/admin/contacts`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+  }
 };

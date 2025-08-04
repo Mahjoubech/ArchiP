@@ -3,40 +3,62 @@ import axios from 'axios';
 const api = 'http://127.0.0.1:8000/api';
 
 export default {
-  getProfile(token) {
-    return axios.get(`${api}/profile`, {
+  // Client profile
+  getClientProfile(token) {
+    return axios.get(`${api}/client/profile`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
   },
 
-  updateUserInfo(data, token) {
-    return axios.post(`${api}/profile/benevole/userInfo`, data, {
+  updateClientProfile(token, data) {
+    return axios.put(`${api}/client/profile`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
-        
+        'Content-Type': 'multipart/form-data'
       }
     });
   },
 
-  updateBenevoleDetails(data, token) {
-    return axios.post(`${api}/profile/benevole/details`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    });
-  },
-
-  getTop3Opportunites(token) {
-    return axios.get(`${api}/profile/benevole/top3Opportunites`, {
+  // Architect profile
+  getArchitectProfile(token) {
+    return axios.get(`${api}/architect/profile`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
   },
 
-  updatePassword(passwordData, token) {
+  updateArchitectProfile(token, data) {
+    return axios.put(`${api}/architect/profile`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  },
+
+  // Admin profile
+  getAdminProfile(token) {
+    return axios.get(`${api}/admin/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
+
+  updateAdminProfile(token, data) {
+    return axios.put(`${api}/admin/profile`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  },
+
+  // Common password update
+  updatePassword(token, passwordData) {
     return axios.put(`${api}/profile/password`, passwordData, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -52,5 +74,5 @@ export default {
         'Content-Type': 'application/json'
       }
     });
-}
-}
+  }
+};

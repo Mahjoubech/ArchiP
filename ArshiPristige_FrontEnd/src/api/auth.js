@@ -38,4 +38,30 @@ export default {
       }
     });
   },
+
+  // Admin routes
+  getAllArchitects(token, page = 1) {
+    return axios.get(`${api}/admin/architects?page=${page}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
+
+  getAllClients(token, page = 1) {
+    return axios.get(`${api}/admin/clients?page=${page}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
+
+  verifyArchitect(token, id) {
+    return axios.put(`${api}/admin/architects/${id}/verify`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
 };
+

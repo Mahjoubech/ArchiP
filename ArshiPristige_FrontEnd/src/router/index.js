@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import home from '../views/home.vue';
 import opportunites from '../views/opportunities/show.vue';
 import OpportuniteDetails from '../views/opportunities/details.vue';
-import registerBenevole from '../views/Auth/register-Benevole.vue';
-import registerAssociation from '../views/Auth/register-association.vue';
+import registerClient from '../views/Auth/register-Benevole.vue';
+import registerArchitect from '../views/Auth/register-association.vue';
 import auth_index from '../views/Auth/auth-index.vue';
 import login from '../views/Auth/login.vue';
 import profile from '../views/benevole/profile.vue';
@@ -44,8 +44,8 @@ const routes = [
   { path: '/Politique_confidentialite', name: 'Politique_confidentialite', component: Politique_confidentialite },
   { path: '/guide-Juridique', name: 'guide_juridique', component: guide_juridique },
   { path: '/opportunites/:id', name: 'OpportuniteDetails', component: OpportuniteDetails, props: true },
-  { path: '/register-benevole/', name: 'registerBenevole', component: registerBenevole, meta: { guestOnly: true } },
-  { path: '/register-association/', name: 'registerAssociation', component: registerAssociation, meta: { guestOnly: true } },
+  { path: '/register-benevole', name: 'RegisterClient', component: registerClient },
+  { path: '/register-association', name: 'RegisterArchitect', component: registerArchitect },
   { path: '/register/', name: 'auth_index', component: auth_index, meta: { guestOnly: true } },
   { path: '/login/', name: 'login', component: login, meta: { guestOnly: true } },
   { path: '/profile/', name: 'profile', component: profile , meta: { requiresAuth: true, role: "benevole" } },
