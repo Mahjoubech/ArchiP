@@ -1,363 +1,250 @@
 <template>
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div class="relative bg-[#C9559B] text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <div class="relative bg-gray-800 text-white py-16">
+      <div class="container mx-auto px-4">
           <div class="text-center">
-            <h1 class="text-4xl font-bold mb-4">Enregistrer une Association</h1>
-            <p class="text-xl opacity-90 max-w-3xl mx-auto">
-              Rejoignez notre plateforme et faites connaître votre association.
-            </p>
-          </div>
+          <h1 class="text-4xl font-bold mb-4">Inscription Architecte</h1>
+          <p class="text-xl opacity-90">
+            Créez votre compte entreprise et commencez vos projets d'architecture d'intérieur.
+          </p>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gray-50 transform skew-y-2 -mb-10"></div>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="bg-white rounded-2xl shadow-xl">
-          <div class="max-w-6xl mx-auto p-8">
-            <form class="space-y-8">
-              <div class="border-b border-gray-200">
-                <div class="max-w-5xl mx-auto">
-                  <div class="flex flex-wrap justify-between items-center gap-4 p-4 md:p-8">
-                    <div class="flex items-center space-x-4">
-                      <span :class="['w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold',
-                                  activeSection === 'personal' ? 'bg-[#00B3AD] text-white' : 'bg-gray-200 text-gray-600']">1</span>
-                      <button type="button" 
-                              @click="activeSection = 'personal'"
-                              :class="['text-sm md:text-base font-bold focus:outline-none',
-                              activeSection === 'personal' ? 'text-[#00B3AD]' : 'text-gray-600']">
+    </div>
+
+    <!-- Registration Form -->
+    <div class="container mx-auto px-4 py-12">
+      <div class="max-w-4xl mx-auto">
+        <!-- Progress Steps -->
+        <div class="mb-8">
+          <div class="flex items-center justify-center space-x-8">
+            <div class="flex items-center">
+              <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors"
+                :class="[activeSection === 'personal' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-600']">1</span>
+              <span class="ml-2 text-sm font-medium transition-colors"
+                :class="[activeSection === 'personal' ? 'text-gray-800' : 'text-gray-600']">
                         Informations Personnelles
-                      </button>
+              </span>
                     </div>
-                    <div class="flex items-center space-x-4">
-                      <span :class="['w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold',
-                                  activeSection === 'association' ? 'bg-[#00B3AD] text-white' : 'bg-gray-200 text-gray-600']">2</span>
-                      <button type="button" 
-                              @click.prevent="validateAndProceed" 
-                              :class="['text-sm md:text-base font-bold focus:outline-none',
-                              activeSection === 'association' ? 'text-[#00B3AD]' : 'text-gray-600']">
-                        Profil Association
-                      </button>
+            <div class="flex items-center">
+              <span class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors"
+                :class="[activeSection === 'architect' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-600']">2</span>
+              <span class="ml-2 text-sm font-medium transition-colors"
+                :class="[activeSection === 'architect' ? 'text-gray-800' : 'text-gray-600']">
+                Profil Architecte
+              </span>
                     </div>
                   </div>
                 </div>
+
+        <!-- Personal Information Section -->
+        <div v-if="activeSection === 'personal'" class="bg-white rounded-lg shadow-md p-8">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800">Informations Personnelles</h2>
+          
+          <form @submit.prevent="nextStep" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nom complet *</label>
+                <input type="text" v-model="formData.name" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
   
-              <div v-if="activeSection === 'personal'" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold text-gray-900">Informations Personnelles</h3>
-                  <div class="grid grid-cols-2 gap-4">
+              <!-- Email -->
                     <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Civilité <span class="text-red-500">*</span>
-                      </label>
-                      <select v-model="formDataPersonnelles.civilite" name="civilite" required
-                              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent">
-                        <option value="">Sélectionnez</option>
-                        <option value="M.">M.</option>
-                        <option value="Mme">Mme</option>
-                        <option value="Mlle">Mlle</option>
-                      </select>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                <input type="email" v-model="formData.email" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                     </div>
+
+              <!-- Phone -->
                     <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        CIN <span class="text-red-500">*</span>
-                      </label>
-                      <input v-model="formDataPersonnelles.cin" type="text" name="cin" required
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="CIN">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone *</label>
+                <input type="tel" v-model="formData.phone" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                     </div>
-                  </div>
-                  <div class="grid grid-cols-2 gap-4">
+
+              <!-- Birth Date -->
                     <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Prénom <span class="text-red-500">*</span>
-                      </label>
-                      <input v-model="formDataPersonnelles.prenom" type="text" name="prenom" required
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="Prénom">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Date de naissance *</label>
+                <input type="date" v-model="formData.birth_date" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                     </div>
+
+              <!-- Gender -->
                     <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Nom <span class="text-red-500">*</span>
-                      </label>
-                      <input v-model="formDataPersonnelles.nom" type="text" name="nom" required
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="Nom">
-                    </div>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Date de naissance <span class="text-red-500">*</span>
-                    </label>
-                    <input v-model="formDataPersonnelles.date_naissance" type="date" name="date_naissance" required
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent">
-                  </div>
-                  <div class="grid grid-cols-2 gap-4">
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Téléphone 1 <span class="text-red-500">*</span>
-                      </label>
-                      <input v-model="formDataPersonnelles.telephone_1" type="tel" name="telephone_1" required
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="+212 XXXXXXXXX">
-                    </div>
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Téléphone 2
-                      </label>
-                      <input v-model="formDataPersonnelles.telephone_2" type="tel" name="telephone_2"
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="+212 XXXXXXXXX">
-                    </div>
-                  </div>
-                </div>
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold text-gray-900">Compte et Contact</h3>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Email <span class="text-red-500">*</span>
-                    </label>
-                    <input v-model="formDataPersonnelles.email" type="email" name="email" required
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                           placeholder="exemple@email.com">
-                  </div>
-                  <div class="grid grid-cols-2 gap-4">
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Mot de passe <span class="text-red-500">*</span>
-                      </label>
-                      <input v-model="formDataPersonnelles.password" type="password" name="password" required
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="********">
-                    </div>
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Confirmer le mot de passe <span class="text-red-500">*</span>
-                      </label>
-                      <input v-model="formDataPersonnelles.password_confirmation" type="password" name="password_confirmation" required
-                             class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                             placeholder="********">
-                    </div>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Ville <span class="text-red-500">*</span>
-                    </label>
-                    <select v-model="formDataPersonnelles.ville" name="ville" required
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent">
-                      <option value="">Sélectionnez une ville</option>
-                      <option value="casablanca">Casablanca</option>
-                      <option value="rabat">Rabat</option>
-                      <option value="marrakech">Marrakech</option>
-                      <option value="tanger">Tanger</option>
-                      <option value="fes">Fès</option>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Genre *</label>
+                <select v-model="formData.gender" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+                  <option value="">Sélectionnez</option>
+                  <option value="male">Homme</option>
+                  <option value="female">Femme</option>
+                  <option value="other">Autre</option>
                     </select>
                   </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Adresse <span class="text-red-500">*</span>
-                    </label>
-                    <textarea v-model="formDataPersonnelles.adresse" name="adresse" rows="3" required
-                              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                              placeholder="Votre adresse complète"></textarea>
+
+              <!-- Address -->
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Adresse *</label>
+                <input type="text" v-model="formData.address" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                   </div>
-                  <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                    <div class="space-y-4">
-                      <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
-                        <img v-if="formDataPersonnelles.imagePreview" :src="formDataPersonnelles.imagePreview" class="w-full h-full object-cover" alt="Preview">
-                        <i v-else class="fas fa-user text-3xl text-gray-400"></i>
-                      </div>
+
+              <!-- City -->
                       <div>
-                        <label class="inline-flex items-center px-4 py-2 bg-[#00B3AD] text-white rounded-lg cursor-pointer hover:bg-[#009B96] transition-colors">
-                          <i class="fas fa-upload mr-2"></i>
-                          <span>Ajouter une photo</span>
-                          <input type="file" @change="handleImageUpload($event, 'image')" name="image" class="hidden" accept="image/*" required>
-                        </label>
-                        <p class="text-xs text-gray-500 mt-2">Format JPG ou PNG, max 2MB</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Ville *</label>
+                <input type="text" v-model="formData.city" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
   
-              <div v-if="activeSection === 'association'" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold text-gray-900">Informations sur l'Association</h3>
+              <!-- Country -->
                   <div>
-                    <label class="block text-sm font-medium text-gray-700">Nom de l'Association <span class="text-red-500">*</span></label>
-                    <input v-model="formDataAssociation.nom_association" type="text" name="nom_association" required
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                           placeholder="Nom de l'association">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Pays *</label>
+                <input type="text" v-model="formData.country" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+                  </div>
+
+              <!-- Postal Code -->
+                  <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Code postal *</label>
+                <input type="text" v-model="formData.postal_code" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+                  </div>
+
+              <!-- Photo -->
+                  <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Photo de profil</label>
+                <input type="file" @change="handlePhotoUpload" accept="image/*"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+                  </div>
+                  </div>
+
+            <!-- Password Section -->
+            <div class="border-t pt-6">
+              <h3 class="text-lg font-semibold mb-4 text-gray-800">Sécurité du compte</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe *</label>
+                  <input type="password" v-model="formData.password" required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700">Date de création de l'Association <span class="text-red-500">*</span></label>
-                    <input v-model="formDataAssociation.date_creation" type="date" name="date_naissance" required
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Numéro RNA <span class="text-red-500">*</span></label>
-                    <input v-model="formDataAssociation.numero_rna_association" type="text" name="numero_rna_association" required
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                           placeholder="Numéro RNA">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Présentation sur votre association <span class="text-red-500">*</span></label>
-                    <textarea v-model="formDataAssociation.objet_social" name="objet_social" rows="3" required
-                              class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                              placeholder="Objet social de l'association"></textarea>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Site Web</label>
-                    <input v-model="formDataAssociation.site_web" type="url" name="site_web"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                           placeholder="https://example.com">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Facebook link</label>
-                    <input v-model="formDataAssociation.facebook" type="url" name="facebook"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                           placeholder="https://example.com">
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Instagram link</label>
-                    <input v-model="formDataAssociation.instagram" type="url" name="instagram"
-                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#00B3AD] focus:border-transparent"
-                           placeholder="https://example.com">
-                  </div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Confirmer le mot de passe *</label>
+                  <input type="password" v-model="formData.password_confirmation" required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                 </div>
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold text-gray-900"> Médias et Documents</h3>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Logo de l'Association <span class="text-red-500">*</span></label>
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                      <div class="space-y-4">
-                        <div class="mx-auto w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
-                          <img v-if="formDataAssociation.logoPreview" :src="formDataAssociation.logoPreview" class="w-full h-full object-cover" alt="Preview">
-                          <i v-else class="fas fa-user text-xl text-gray-400"></i>
-                        </div>
-                        <div>
-                          <label class="inline-flex items-center px-4 py-2 bg-[#00B3AD] text-white rounded-lg cursor-pointer hover:bg-[#009B96] transition-colors">
-                            <i class="fas fa-upload mr-2"></i>
-                            <span>Ajouter le logo</span>
-                            <input type="file" @change="handleImageUpload($event, 'logo')" name="logo" class="hidden" accept="image/*" required>
-                          </label>
-                          <p class="text-xs text-gray-500 mt-2">Format JPG ou PNG, max 2MB</p>
                         </div>
                       </div>
+
+            <div class="flex justify-end">
+              <button type="submit" 
+                class="px-8 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2">
+                Suivant
+              </button>
                     </div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2 mt-2">Carte nationale d'identité du président <span class="text-red-500">*</span></label>
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                      <div class="space-y-4">
-                        <div class="mx-auto w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
-                          <img v-if="formDataAssociation.carte_nationalePreview" :src="formDataAssociation.carte_nationalePreview" class="w-full h-full object-cover" alt="Preview">
-                          <i v-else class="fas fa-user text-xl text-gray-400"></i>
+          </form>
                         </div>
+
+        <!-- Architect Profile Section -->
+        <div v-if="activeSection === 'architect'" class="bg-white rounded-lg shadow-md p-8">
+          <h2 class="text-2xl font-bold mb-6 text-gray-800">Profil Architecte</h2>
+          
+          <form @submit.prevent="registerArchitect" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- License Number -->
                         <div>
-                          <label class="inline-flex items-center px-4 py-2 bg-[#00B3AD] text-white rounded-lg cursor-pointer hover:bg-[#009B96] transition-colors">
-                            <i class="fas fa-upload mr-2"></i>
-                            <span>Ajouter la carte nationale</span>
-                            <input type="file" @change="handleImageUpload($event, 'carte_nationale')" name="carte_nationale" class="hidden" accept="image/*" required>
-                          </label>
-                          <p class="text-xs text-gray-500 mt-2">Format JPG ou PNG, max 2MB</p>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Numéro de licence *</label>
+                <input type="text" v-model="formData.license_number" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
                         </div>
-                      </div>
-                    </div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2 mt-2">Fichier PDF du statut ou loi fondamentale  <span class="text-red-500">*</span></label>
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                      <div class="space-y-4">
-                        <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center">
-                          <i v-if="!formDataAssociation.status_associationName" class="fas fa-file-pdf text-3xl text-gray-400"></i>
-                          <i v-else class="fas fa-check-circle text-3xl text-green-500"></i>
-                        </div>
+
+              <!-- Years of Experience -->
                         <div>
-                          <label class="inline-flex items-center px-4 py-2 bg-[#00B3AD] text-white rounded-lg cursor-pointer hover:bg-[#009B96] transition-colors">
-                            <i class="fas fa-upload mr-2"></i>
-                            <span>Ajouter votre PDF</span>
-                            <input type="file" @change="handlepdfUpload" name="pdf" class="hidden" accept=".pdf">
-                          </label>
-                          <p class="text-xs text-gray-500 mt-2">Format PDF uniquement, max 2MB</p>
-                        </div>
-                        <div v-if="formDataAssociation.status_associationName" class="text-sm text-gray-700 mt-2">
-                          <strong>Fichier téléchargé :</strong> {{ formDataAssociation.status_associationName }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Années d'expérience *</label>
+                <input type="number" v-model="formData.years_of_experience" min="0" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
   
-              <div v-if="activeSection === 'personal'" class="mt-6">
-                <button @click.prevent="validateAndProceed" type="button"
-                        class="w-full bg-[#00B3AD] text-white py-4 rounded-lg hover:bg-[#009B96] 
-                            transition-colors duration-200 flex items-center justify-center space-x-2 text-lg">
-                  <span>Continuer vers l'étape suivante</span>
-                  <i class="fas fa-arrow-right"></i>
-                </button>
+              <!-- Hourly Rate -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Taux horaire (MAD) *</label>
+                <input type="number" v-model="formData.hourly_rate" min="0" step="0.01" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
-              <div v-if="activeSection === 'association'" class="mt-6">
-                <button @click="submitForm" type="button"
-                        class="w-full bg-[#00B3AD] text-white py-4 rounded-lg hover:bg-[#009B96] 
-                            transition-colors duration-200 flex items-center justify-center space-x-2 text-lg">
-                  <span>Valider l'inscription</span>
-                  <i class="fas fa-arrow-right"></i>
-                </button>
+
+              <!-- Portfolio URL -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">URL du portfolio</label>
+                <input type="url" v-model="formData.portfolio_url"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
-              <div v-if="formError" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4">
-                {{ formError }}
+
+              <!-- Website -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Site web</label>
+                <input type="url" v-model="formData.website"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
-              <div v-if="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                {{ successMessage }}
+
+              <!-- LinkedIn -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">LinkedIn</label>
+                <input type="url" v-model="formData.linkedin"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
               </div>
-            </form>
-          </div>
-          <div class="border-t border-gray-200 p-8 bg-gray-50 rounded-b-2xl">
-            <div class="max-w-6xl mx-auto flex justify-between items-center">
-              <p class="text-gray-600">
-                Déjà inscrit ? 
-                <a href="#" class="text-[#00B3AD] hover:underline font-medium">Connectez-vous</a>
-              </p>
             </div>
-          </div>
+
+            <!-- Specializations -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Spécialisations *</label>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <label v-for="spec in specializations" :key="spec.value" class="flex items-center space-x-2">
+                  <input type="checkbox" :value="spec.value" v-model="formData.specializations" 
+                    class="text-gray-800 focus:ring-gray-800">
+                  <span class="text-sm">{{ spec.label }}</span>
+                </label>
         </div>
       </div>
   
-      <div v-if="showSuccessModal" class="fixed inset-0 flex items-center justify-center z-50">
-        <div class="fixed inset-0 bg-black opacity-70"></div>
-        
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 z-10 overflow-hidden transform transition-all duration-300 scale-100">
-          <div class="bg-[#00B3AD] p-6 text-center">
-            <div class="mx-auto w-20 h-20 rounded-full bg-white flex items-center justify-center mb-4">
-              <i class="fas fa-check-circle text-[#00B3AD] text-5xl"></i>
+            <!-- Education -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Formation *</label>
+              <div class="space-y-4">
+                <div v-for="(edu, index) in formData.education" :key="index" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <input type="text" v-model="edu.degree" placeholder="Diplôme" required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+                  <input type="text" v-model="edu.institution" placeholder="Institution" required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+                  <input type="number" v-model="edu.year" placeholder="Année" min="1950" max="2030" required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
             </div>
-            <h3 class="text-xl font-bold text-white">Inscription réussie!</h3>
-          </div>
-          
-          <div class="p-6">
-            <div class="text-center space-y-4">
-              <p class="text-gray-700">
-                Votre inscription a été enregistrée avec succès. Elle est actuellement en attente de validation par un administrateur.
-              </p>
-              <p class="text-gray-700">
-                Vous recevrez un e-mail une fois votre compte approuvé ou refusé.
-              </p>
-              
-              <div class="bg-blue-50 rounded-lg p-4 mt-4 flex items-start">
-                <i class="fas fa-info-circle text-blue-500 mt-1 mr-3"></i>
-                <p class="text-sm text-blue-800 text-left">
-                  En attendant, vérifiez régulièrement votre boîte de réception et vos spams pour ne pas manquer notre notification.
-                </p>
+                <button type="button" @click="addEducation" 
+                  class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50">
+                  + Ajouter une formation
+                </button>
               </div>
             </div>
+
+            <!-- Verification Documents -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Documents de vérification *</label>
+              <p class="text-sm text-gray-600 mb-4">Veuillez fournir vos documents de licence et certifications</p>
+              <input type="file" @change="handleDocumentsUpload" multiple accept=".pdf,.jpg,.jpeg,.png" required
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-800 focus:border-transparent">
+              <p class="text-xs text-gray-500 mt-2">Formats acceptés: PDF, JPG, PNG. Max 2MB par fichier</p>
           </div>
           
-          <div class="border-t border-gray-200 p-6 flex justify-center">
-            <button 
-              @click="redirectToLogin" 
-              class="px-6 py-3 bg-[#C9559B] text-white rounded-lg hover:bg-[#b34c8b] transition-colors duration-200 flex items-center"
-            >
-              <span>Retourner à la page de connexion</span>
-              <i class="fas fa-arrow-right ml-2"></i>
+            <div class="flex justify-between">
+              <button type="button" @click="activeSection = 'personal'"
+                class="px-8 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2">
+                Retour
+              </button>
+              <button type="submit" :disabled="loading"
+                class="px-8 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 disabled:opacity-50">
+                {{ loading ? 'Inscription en cours...' : 'Créer mon compte' }}
             </button>
+            </div>
+          </form>
           </div>
         </div>
       </div>
@@ -365,224 +252,141 @@
   </template>
   
   <script>
-  import authapi from "@/api/auth";   
+import authApi from '@/api/auth.js';
   
   export default {
+  name: 'RegisterArchitect',
     data() {
       return {
         activeSection: 'personal',
-        formDataPersonnelles: {
-          civilite: '',
-          cin: '',
-          prenom: '',
-          nom: '',
-          date_naissance: '',
-          telephone_1: '',
-          telephone_2: '',
+      loading: false,
+      formData: {
+        // Personal Information
+        name: '',
           email: '',
+        phone: '',
+        address: '',
+        city: '',
+        country: '',
+        postal_code: '',
+        birth_date: '',
+        gender: '',
+        photo: null,
+        
+        // Security
           password: '',
           password_confirmation: '',
-          ville: '',
-          adresse: '',
-          image: null,
-          imagePreview: null,
-        },
-        formDataAssociation: {
-          nom_association: '',
-          date_creation: '',
-          numero_rna_association: '',
-          objet_social: '',
-          site_web: '',
-          facebook: '',
-          instagram: '',
-          logo: null,
-          logoPreview: null,
-          status_association: null,
-          status_associationName: '',
-          pdfPreview: null,
-          carte_nationale: null,
-          carte_nationalePreview: null,
-        },
-        formError: '',
-        successMessage: '',
-        showSuccessModal: false,
+        
+        // Architect Profile
+        license_number: '',
+        years_of_experience: '',
+        specializations: [],
+        education: [{ degree: '', institution: '', year: '' }],
+        hourly_rate: '',
+        portfolio_url: '',
+        website: '',
+        linkedin: '',
+        verification_documents: []
+      },
+      specializations: [
+        { value: 'residential', label: 'Résidentiel' },
+        { value: 'commercial', label: 'Commercial' },
+        { value: 'interior_design', label: 'Design d\'intérieur' },
+        { value: 'renovation', label: 'Rénovation' },
+        { value: 'landscape', label: 'Paysage' },
+        { value: 'sustainable', label: 'Architecture durable' },
+        { value: 'modern', label: 'Architecture moderne' },
+        { value: 'traditional', label: 'Architecture traditionnelle' },
+        { value: 'luxury', label: 'Luxe' },
+        { value: 'minimalist', label: 'Minimaliste' }
+      ]
       };
     },
     methods: {
-      validateAndProceed() {
-        if (this.activeSection === 'personal') {
-          if (this.validateForm()) {
-            this.activeSection = 'association';
-          }
-        }
-      },
-      validateForm() {
-        this.formError = '';
-        const requiredInputs = [
-          'civilite', 'cin', 'prenom', 'nom', 'date_naissance',
-          'telephone_1', 'email', 'password', 'password_confirmation',
-          'ville', 'adresse', 'image'
-        ];
-  
-        for (const input of requiredInputs) {
-          if (!this.formDataPersonnelles[input]) {
-            this.formError = 'Veuillez remplir tous les champs obligatoires';
-            return false;
-          }
-        }
-        const phonePattern =  /^(?:\+212|0)[5-7][0-9]{8}$/;
-        if (
-          !phonePattern.test(this.formDataPersonnelles.telephone_1) ||
-          (this.formDataPersonnelles.telephone_2 && !phonePattern.test(this.formDataPersonnelles.telephone_2))
-        ) {
-          this.formError = 'Format invalide. Exemple: 0612345678 ou +212612345678';
-          return false;
-        }
-  
-        if (this.formDataPersonnelles.password !== this.formDataPersonnelles.password_confirmation) {
-          this.formError = 'Les mots de passe ne correspondent pas';
-          return false;
-        }
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?.&]).{8,}$/;
-        if (!passwordRegex.test(this.formDataPersonnelles.password)) {
-          this.formError = 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial';
-          return false;
-        }
-  
-        if (this.formDataPersonnelles.date_naissance) {
-          const birthDate = new Date(this.formDataPersonnelles.date_naissance);
-          const today = new Date();
-          const age = Math.floor((today - birthDate) / (365.25 * 24 * 60 * 60 * 1000));
-          
-          if (age < 18) {
-            this.formError = 'Vous devez avoir au moins 18 ans pour vous inscrire';
-            return false;
-          }
-        }
-  
-        return true;
-      },
-      validateForm2() {
-        this.formError = '';
-        this.successMessage = '';
-        const requiredInputs = [
-          'nom_association', 'date_creation', 'numero_rna_association',
-          'objet_social', 'logo', 'status_association', 'carte_nationale'
-        ];
-  
-        for (const input of requiredInputs) {
-          if (!this.formDataAssociation[input]) {
-            this.formError = 'Veuillez remplir tous les champs obligatoires';
-            return false;
-          }
-        }
-  
-        if (this.formDataAssociation.logo && this.formDataAssociation.logo.size > 2 * 1024 * 1024) {
-          this.formError = 'Le logo ne doit pas dépasser 2MB';
-          return false;
-        }
-  
-        if (this.formDataAssociation.status_association && this.formDataAssociation.status_association.size > 2 * 1024 * 1024) {
-          this.formError = 'Le fichier PDF ne doit pas dépasser 2MB';
-          return false;
-        }
-  
-        if (this.formDataAssociation.carte_nationale && this.formDataAssociation.carte_nationale.size > 2 * 1024 * 1024) {
-          this.formError = 'La carte nationale ne doit pas dépasser 2MB';
-          return false;
-        }
-  
-        const urlPattern = /^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-]*)*$/;
-        if (this.formDataAssociation.site_web && !urlPattern.test(this.formDataAssociation.site_web)) {
-          this.formError = 'L\'URL du site web est invalide';
-          return false;
-        }
-        if (this.formDataAssociation.facebook && !urlPattern.test(this.formDataAssociation.facebook)) {
-          this.formError = 'L\'URL Facebook est invalide';
-          return false;
-        }
-        if (this.formDataAssociation.instagram && !urlPattern.test(this.formDataAssociation.instagram)) {
-          this.formError = 'L\'URL Instagram est invalide';
-          return false;
-        }
-  
-        return true;
-      },
-  
-      handleImageUpload(event, fieldName) {
-        const file = event.target.files[0];
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-  
-        if (file) {
-          if (!allowedTypes.includes(file.type)) {
-            this.formError = 'Format d\'image invalide. Utilisez JPG ou PNG uniquement';
+    handlePhotoUpload(event) {
+      this.formData.photo = event.target.files[0];
+    },
+    
+    handleDocumentsUpload(event) {
+      this.formData.verification_documents = Array.from(event.target.files);
+    },
+    
+    addEducation() {
+      this.formData.education.push({ degree: '', institution: '', year: '' });
+    },
+    
+    nextStep() {
+      // Validate personal information
+      if (!this.formData.name || !this.formData.email || !this.formData.phone || 
+          !this.formData.address || !this.formData.city || !this.formData.country || 
+          !this.formData.postal_code || !this.formData.birth_date || !this.formData.gender ||
+          !this.formData.password || !this.formData.password_confirmation) {
+        alert('Veuillez remplir tous les champs obligatoires');
             return;
           }
   
-          if (file.size > 2 * 1024 * 1024) {
-            this.formError = 'L\'image ne doit pas dépasser 2MB';
+      if (this.formData.password !== this.formData.password_confirmation) {
+        alert('Les mots de passe ne correspondent pas');
             return;
           }
-          this.formError = '';
-          if(fieldName === "image"){
-            this.formDataPersonnelles.image = file;
-            this.formDataPersonnelles.imagePreview = URL.createObjectURL(file);
-          }else{
-            this.formDataAssociation[fieldName] = file;
-            this.formDataAssociation[`${fieldName}Preview`] = URL.createObjectURL(file);
-          }
-        }
-      },
-  
-      handlepdfUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-          if (file.type !== 'application/pdf') {
-            this.formError = 'Format de fichier invalide. Utilisez uniquement le format PDF';
-            return;
-          }
-          this.formError = '';
-          this.formDataAssociation.status_association = file;
-          this.formDataAssociation.status_associationName = file.name;
-        }
-      },
-  
-      async submitForm() {
-        if (!this.validateForm() || !this.validateForm2()) {
-          return; 
-        }
+      
+      this.activeSection = 'architect';
+    },
+    
+    async registerArchitect() {
+      this.loading = true;
+      
         try {
           const formData = new FormData();
   
-          for (const key in this.formDataPersonnelles) {
-            formData.append(key, this.formDataPersonnelles[key]);
+        // Add personal information
+        Object.keys(this.formData).forEach(key => {
+          if (key === 'specializations' || key === 'education') {
+            // Handle arrays
+            if (this.formData[key] && this.formData[key].length > 0) {
+              if (key === 'specializations') {
+                this.formData[key].forEach(spec => {
+                  formData.append(`${key}[]`, spec);
+                });
+              } else if (key === 'education') {
+                formData.append(key, JSON.stringify(this.formData[key]));
+              }
+            }
+          } else if (key === 'verification_documents') {
+            // Handle file arrays
+            if (this.formData[key] && this.formData[key].length > 0) {
+              this.formData[key].forEach(file => {
+                formData.append(`${key}[]`, file);
+              });
+            }
+          } else if (this.formData[key] !== null && this.formData[key] !== '') {
+            formData.append(key, this.formData[key]);
           }
-  
-          for (const key in this.formDataAssociation) {
-            formData.append(key, this.formDataAssociation[key]);
-          }
-          const response = await authapi.registerAssociation(formData);
+        });
+        
+        const response = await authApi.registerArchitect(formData);
   
           if (response.status === 201) {
-            this.formError = '';
-            this.showSuccessModal = true; // Afficher le modal au lieu du message simple
+          alert('Inscription réussie! Votre compte sera vérifié par l\'administrateur avant activation.');
+          this.$router.push('/login');
           }
         } catch (error) {
-          if (error.response && error.response.data && error.response.data.message && error.response.data.errors) {
-            const erreurs = Object.values(error.response.data.errors)
-              .flat()
-              .join('\n');
-            this.formError = erreurs;
+        console.error('Registration error:', error);
+        if (error.response && error.response.data && error.response.data.errors) {
+          const errors = error.response.data.errors;
+          let errorMessage = 'Erreurs de validation:\n';
+          Object.keys(errors).forEach(key => {
+            errorMessage += `- ${errors[key][0]}\n`;
+          });
+          alert(errorMessage);
           } else {
-            this.formError = 'Une erreur est survenue lors de l\'inscription.'; 
-          }
+          alert('Erreur lors de l\'inscription. Veuillez réessayer.');
         }
-      },
-      
-      redirectToLogin() {
-        this.$router.push('/login');
+      } finally {
+        this.loading = false;
       }
-    },
+    }
+  }
   };
   </script>
   

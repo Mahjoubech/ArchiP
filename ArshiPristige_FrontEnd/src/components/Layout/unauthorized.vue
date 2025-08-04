@@ -11,7 +11,7 @@
           Vous n'avez pas l'autorisation d'accéder à cette page. Veuillez vérifier vos autorisations ou contacter un administrateur si nécessaire.
         </p>
         <div class="flex justify-center space-x-4">
-          <button @click="goHome" class="px-6 py-2 bg-[#00B3AD] text-white font-medium text-sm rounded-lg shadow hover:bg-[#b04b8b] focus:outline-none focus:ring-2 focus:ring-[#C9559B] focus:ring-offset-2">
+          <button @click="goHome" class="px-6 py-2 bg-gray-800 text-white font-medium text-sm rounded-lg shadow hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2">
             Retour à l'accueil
           </button>
         </div>

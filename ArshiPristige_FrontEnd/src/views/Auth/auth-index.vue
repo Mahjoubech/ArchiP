@@ -3,10 +3,10 @@
         <div class="container mx-auto px-4 py-16">
             <div class="text-center mb-16 animate-fade-in-down">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    Rejoignez <span class="text-[#00B3AD]">BénévoMaroc</span>
+                    Rejoignez <span class="text-gray-800">ArshiPristige Concept</span>
                 </h1>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Choisissez votre parcours et commencez votre aventure dans le bénévolat
+                    Choisissez votre type de compte et commencez votre projet d'architecture d'intérieur
                 </p>
             </div>
 
@@ -15,48 +15,48 @@
                     <div class="transform transition-all duration-300 hover:scale-[1.02]">
                         <input type="radio" name="account-type" id="benevole" class="peer hidden">
                         <label for="benevole" class="block cursor-pointer">
-                            <div class="relative overflow-hidden bg-white rounded-2xl shadow-xl peer-checked:shadow-[#00B3AD]/20 
-                                        peer-checked:border-2 peer-checked:border-[#00B3AD]">
-                                <div class="absolute top-0 left-0 right-0 h-2 bg-[#00B3AD] transform origin-left 
+                            <div class="relative overflow-hidden bg-white rounded-2xl shadow-xl peer-checked:shadow-gray-800/20 
+                                        peer-checked:border-2 peer-checked:border-gray-800">
+                                <div class="absolute top-0 left-0 right-0 h-2 bg-gray-800 transform origin-left 
                                             scale-x-0 peer-checked:scale-x-100 transition-transform duration-300"></div>
                                 
                                 <div class="p-8">
                                  <router-link :to="'/register-benevole/'">
                                     
                                     <div class="flex items-center mb-6">
-                                        <div class="w-16 h-16 bg-[#00B3AD]/10 rounded-2xl flex items-center justify-center mr-4 
+                                        <div class="w-16 h-16 bg-gray-800/10 rounded-2xl flex items-center justify-center mr-4 
                                                     transform rotate-3">
-                                            <i class="fas fa-hands-helping text-2xl text-[#00B3AD]"></i>
+                                            <i class="fas fa-home text-2xl text-gray-800"></i>
                                         </div>
                                         <div>
-                                            <h3 class="text-2xl font-bold text-gray-900">Devenir Bénévole</h3>
+                                            <h3 class="text-2xl font-bold text-gray-900">Client Particulier</h3>
                                             <p class="text-gray-500">Compte Personnel</p>
                                         </div>
                                     </div>
 
 
                                     <p class="text-gray-600 mb-6 leading-relaxed">
-                                        Rejoignez notre communauté dynamique de bénévoles et participez à des projets qui font la différence.
+                                        Transformez votre espace de vie avec nos services d'architecture d'intérieur personnalisés.
                                     </p>
 
                                     <ul class="space-y-4">
                                         <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-[#00B3AD]/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-search text-[#00B3AD]"></i>
+                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-pencil-ruler text-gray-800"></i>
                                             </div>
-                                            <span>Trouvez des missions qui vous correspondent</span>
+                                            <span>Conception personnalisée de votre espace</span>
                                         </li>
                                         <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-[#00B3AD]/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-star text-[#00B3AD]"></i>
+                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-star text-gray-800"></i>
                                             </div>
-                                            <span>Développez vos compétences</span>
+                                            <span>Suivi de projet professionnel</span>
                                         </li>
                                         <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-[#00B3AD]/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-heart text-[#00B3AD]"></i>
+                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-home text-gray-800"></i>
                                             </div>
-                                            <span>Créez un impact social positif</span>
+                                            <span>Réalisation de votre espace de rêve</span>
                                         </li>
                                     </ul>
 
@@ -72,46 +72,46 @@
                     <div class="transform transition-all duration-300 hover:scale-[1.02]">
                         <input type="radio" name="account-type" id="association" class="peer hidden">
                         <label for="association" class="block cursor-pointer">
-                            <div class="relative overflow-hidden bg-white rounded-2xl shadow-xl peer-checked:shadow-[#C9559B]/20 
-                                        peer-checked:border-2 peer-checked:border-[#C9559B]">
-                                <div class="absolute top-0 left-0 right-0 h-2 bg-[#C9559B] transform origin-left 
+                            <div class="relative overflow-hidden bg-white rounded-2xl shadow-xl peer-checked:shadow-gray-800/20 
+                                        peer-checked:border-2 peer-checked:border-gray-800">
+                                <div class="absolute top-0 left-0 right-0 h-2 bg-gray-800 transform origin-left 
                                             scale-x-0 peer-checked:scale-x-100 transition-transform duration-300"></div>
                                 
                                 <div class="p-8">
                                     <router-link :to="'/register-association/'">
                                     <div class="flex items-center mb-6">
-                                        <div class="w-16 h-16 bg-[#C9559B]/10 rounded-2xl flex items-center justify-center mr-4 
+                                        <div class="w-16 h-16 bg-gray-800/10 rounded-2xl flex items-center justify-center mr-4 
                                                     transform -rotate-3">
-                                            <i class="fas fa-building text-2xl text-[#C9559B]"></i>
+                                            <i class="fas fa-building text-2xl text-gray-800"></i>
                                         </div>
                                         <div>
-                                            <h3 class="text-2xl font-bold text-gray-900">Inscrire mon Association</h3>
-                                            <p class="text-gray-500">Compte Organisation</p>
+                                            <h3 class="text-2xl font-bold text-gray-900">Client Professionnel</h3>
+                                            <p class="text-gray-500">Compte Entreprise</p>
                                         </div>
                                     </div>
 
                                     <p class="text-gray-600 mb-6 leading-relaxed">
-                                        Trouvez des bénévoles passionnés et engagés pour soutenir vos projets associatifs.
+                                        Bénéficiez de nos services d'architecture d'intérieur pour vos projets professionnels.
                                     </p>
                                     
                                     <ul class="space-y-4">
                                         <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-[#C9559B]/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-users text-[#C9559B]"></i>
+                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-briefcase text-gray-800"></i>
                                             </div>
-                                            <span>Accédez à une communauté de bénévoles</span>
+                                            <span>Projets commerciaux et bureaux</span>
                                         </li>
                                         <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-[#C9559B]/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-tasks text-[#C9559B]"></i>
+                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-chart-line text-gray-800"></i>
                                             </div>
-                                            <span>Gérez vos missions facilement</span>
+                                            <span>Suivi de chantier professionnel</span>
                                         </li>
                                         <li class="flex items-center text-gray-600">
-                                            <div class="w-8 h-8 bg-[#C9559B]/10 rounded-lg flex items-center justify-center mr-3">
-                                                <i class="fas fa-chart-line text-[#C9559B]"></i>
+                                            <div class="w-8 h-8 bg-gray-800/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-handshake text-gray-800"></i>
                                             </div>
-                                            <span>Suivez vos impacts et résultats</span>
+                                            <span>Partnership et collaboration</span>
                                         </li>
                                     </ul>
 

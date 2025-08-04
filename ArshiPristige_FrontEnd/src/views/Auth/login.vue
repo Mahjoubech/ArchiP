@@ -38,10 +38,10 @@
                                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <i class="fas fa-envelope text-[#00B3AD]"></i>
+                                            <i class="fas fa-envelope text-gray-800"></i>
                                         </div>
                                         <input v-model="formData.email" type="email" id="email" name="email" 
-                                            class="block w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00B3AD] focus:border-[#00B3AD]" 
+                                            class="block w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-800 focus:border-gray-800" 
                                             placeholder="votre@email.com">
                                     </div>
                                 </div>
@@ -52,16 +52,16 @@
                                     </div>
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <i class="fas fa-lock text-[#00B3AD]"></i>
+                                            <i class="fas fa-lock text-gray-800"></i>
                                         </div>
                                         <input v-model="formData.password" type="password" id="password" name="password" 
-                                            class="block w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00B3AD] focus:border-[#00B3AD]" 
+                                            class="block w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-800 focus:border-gray-800" 
                                             placeholder="••••••••">
                                     </div>
                                 </div>
                             </div>
                             
-                            <button type="submit" class="w-full mt-6 flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-white bg-[#00B3AD] hover:bg-[#00B3AD]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00B3AD]">
+                            <button type="submit" class="w-full mt-6 flex justify-center py-2 px-4 border border-transparent rounded-xl shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
                                 Se connecter
                             </button>
                         </form>
@@ -70,7 +70,7 @@
                             <p class="text-gray-600">
                                 Vous n'avez pas de compte? 
                                 <router-link to="/register">
-                                    <span class="font-medium text-[#00B3AD] hover:underline">S'inscrire</span>
+                                    <span class="font-medium text-gray-800 hover:underline">S'inscrire</span>
                                 </router-link>
                             </p>
                         </div>

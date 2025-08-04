@@ -7,22 +7,21 @@ export default {
     return axios.post(`${api}/login`, data);
   },
 
-  registerBenevole(data) {
-    return axios.post(`${api}/benevole`, data, {
+  registerClient(data) {
+    return axios.post(`${api}/register/client`, data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
   },
 
-  registerAssociation(data) {
-    return axios.post(`${api}/association`, data, {
+  registerArchitect(data) {
+    return axios.post(`${api}/register/architect`, data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
   },
-
 
   authStatus(token) {
     return axios.get(`${api}/auth-status`, {
@@ -30,16 +29,13 @@ export default {
         Authorization: `Bearer ${token}`
       }
     });
-    },
+  },
 
-    logout(token) {
-      return axios.post(`${api}/logout`, null, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    },
-
-
-  
+  logout(token) {
+    return axios.post(`${api}/logout`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  },
 };

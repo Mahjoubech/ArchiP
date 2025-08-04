@@ -159,7 +159,7 @@
                   {{ profileData.nom_association}}
                 </span>
                 <span class="text-xs text-gray-500">
-                  <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>Connecté
+                  <span class="inline-block w-2 h-2 bg-gray-600 rounded-full mr-1"></span>Connecté
                 </span>
               </div>         
               </button>
@@ -172,7 +172,7 @@
                   {{ authStore.user.prenom }} {{ authStore.user.nom }}
                 </span>
                 <span class="text-xs text-gray-500">
-                  <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-1"></span>Connecté
+                  <span class="inline-block w-2 h-2 bg-gray-600 rounded-full mr-1"></span>Connecté
                 </span>
               </div>         
               </button>
