@@ -19,6 +19,7 @@ import contacts_admin from '../views/admin/contacts/show.vue';
 import contact from '../views/others/contact.vue';
 import faq from '../views/others/faq.vue';
 import apopos from '../views/others/apopos.vue';
+import services from '../views/others/services.vue';
 import benevoles from '../views/others/benevoles.vue';
 import formation from '../views/others/formation.vue';
 import association from '../views/others/association.vue';
@@ -35,6 +36,7 @@ const routes = [
   { path: '/contact', name: 'contact', component: contact },
   { path: '/faq', name: 'faq', component: faq },
   { path: '/propos', name: 'apopos', component: apopos },
+  { path: '/services', name: 'services', component: services },
   { path: '/Benevoles', name: 'benevoles', component: benevoles },
   { path: '/associations', name: 'association', component: association },
   { path: '/formations', name: 'formation', component: formation },
