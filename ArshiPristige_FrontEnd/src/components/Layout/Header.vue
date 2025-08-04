@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-[#C9559B] text-white py-2">
+    <div class="bg-black text-white py-2">
       <div class="container mx-auto px-4 flex justify-between items-center text-xs sm:text-sm">
         <div class="flex items-center space-x-2 sm:space-x-4">
           <span><i class="fas fa-envelope mr-1 sm:mr-2"></i>contact@benevolat.org</span>
@@ -24,7 +24,7 @@
                 <img src="/images/logo.png" alt="BénévoMaroc Logo" class="w-10 h-10" />
               </div>
               <h1 class="text-2xl font-bold text-gray-800" style="font-family: 'ProfessionalFont', sans-serif;">
-                <span style="color: #00B3AD;">BÉNÉVO</span><span>MAROC</span>
+                <span style="color:rgb(99, 99, 99);">Arshi</span><span >Pristige</span>
               </h1>
             </div>
           </div>

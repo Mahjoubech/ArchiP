@@ -6,7 +6,8 @@
             <div class="flex items-center space-x-2 justify-center md:justify-start">
               <img src="/images/logo.png" alt="BénévoMaroc Logo" class="w-10 h-10" />
               <h3 class="text-xl font-bold">
-                <span class="text-[#00B3AD]">BÉNÉVO</span><span class="text-gray-800">MAROC</span>
+                                <span style="color:rgb(99, 99, 99);">Arshi</span><span >Pristige</span>
+
               </h3>
             </div>
             <p class="text-gray-500 text-sm">

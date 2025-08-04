@@ -1,30 +1,30 @@
-# ArshiPristige Backend API
+# PlatformPro Backend API
 
-A Laravel-based API for connecting clients with architects for architectural projects.
+A Laravel-based API for connecting people with opportunities and organizations.
 
 ## 🏗️ System Overview
 
-ArshiPristige is a platform that connects:
-- **Clients** - who need architectural services
-- **Architects** - who provide architectural services  
+PlatformPro is a platform that connects:
+- **Members** - who want to find opportunities
+- **Organizations** - who provide opportunities  
 - **Admins** - who manage the platform
 
 ## 🎯 User Roles
 
-### Client
-- Create and manage projects
-- Review and accept/reject proposals from architects
-- Manage profile and company information
+### Member
+- Browse and apply for opportunities
+- Manage profile and skills
+- Track applications and certifications
 
-### Architect
-- Browse available projects
-- Submit proposals for projects
-- Manage portfolio and professional information
+### Organization
+- Create and manage opportunities
+- Review and accept/reject applications
+- Manage organization profile and information
 - Requires admin verification before accessing the platform
 
 ### Admin
-- Verify architect accounts
-- Manage categories and projects
+- Verify organization accounts
+- Manage categories and opportunities
 - View platform statistics
 - Manage all users
 
@@ -61,7 +61,7 @@ Edit `.env` file with your database credentials:
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
-DB_DATABASE=arshipristige
+DB_DATABASE=platformpro
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
@@ -82,38 +82,38 @@ The API will be available at `http://localhost:8000`
 
 ### Authentication
 - `POST /api/login` - User login
-- `POST /api/register/client` - Register as client
-- `POST /api/register/architect` - Register as architect
+- `POST /api/register/member` - Register as member
+- `POST /api/register/organization` - Register as organization
 - `POST /api/logout` - User logout (authenticated)
 - `GET /api/auth-status` - Check authentication status (authenticated)
 
 ### Public Endpoints
-- `GET /api/projects` - Get all projects
-- `GET /api/projects/featured` - Get featured projects
-- `GET /api/projects/search` - Search projects
-- `GET /api/projects/{id}` - Get project by ID
+- `GET /api/opportunities` - Get all opportunities
+- `GET /api/opportunities/featured` - Get featured opportunities
+- `GET /api/opportunities/search` - Search opportunities
+- `GET /api/opportunities/{id}` - Get opportunity by ID
 - `GET /api/categories` - Get all categories
 - `POST /api/contact` - Send contact message
 
-### Client Endpoints (authenticated)
-- `POST /api/projects` - Create new project
-- `GET /api/client/projects` - Get client's projects
-- `PUT /api/projects/{id}` - Update project
-- `DELETE /api/projects/{id}` - Delete project
-- `PUT /api/proposals/{id}/status` - Accept/reject proposal
-- `GET /api/client/profile` - Get client profile
-- `PUT /api/client/profile` - Update client profile
+### Member Endpoints (authenticated)
+- `GET /api/member/opportunities` - Get member's applied opportunities
+- `GET /api/member/profile` - Get member profile
+- `PUT /api/member/profile` - Update member profile
+- `POST /api/opportunities/{id}/apply` - Apply for opportunity
 
-### Architect Endpoints (authenticated)
-- `POST /api/projects/{id}/proposals` - Submit proposal
-- `GET /api/architect/proposals` - Get architect's proposals
-- `GET /api/architect/profile` - Get architect profile
-- `PUT /api/architect/profile` - Update architect profile
+### Organization Endpoints (authenticated)
+- `POST /api/opportunities` - Create new opportunity
+- `GET /api/organization/opportunities` - Get organization's opportunities
+- `PUT /api/opportunities/{id}` - Update opportunity
+- `DELETE /api/opportunities/{id}` - Delete opportunity
+- `PUT /api/applications/{id}/status` - Accept/reject application
+- `GET /api/organization/profile` - Get organization profile
+- `PUT /api/organization/profile` - Update organization profile
 
 ### Admin Endpoints (authenticated)
-- `GET /api/admin/architects` - Get all architects
-- `GET /api/admin/clients` - Get all clients
-- `PUT /api/admin/architects/{id}/verify` - Verify architect account
+- `GET /api/admin/organizations` - Get all organizations
+- `GET /api/admin/members` - Get all members
+- `PUT /api/admin/organizations/{id}/verify` - Verify organization account
 - `POST /api/admin/categories` - Create category
 - `PUT /api/admin/categories/{id}` - Update category
 - `DELETE /api/admin/categories/{id}` - Delete category
@@ -133,28 +133,28 @@ Authorization: Bearer {your-token}
 - Basic user information (name, email, password, role)
 - Profile data (phone, address, photo, etc.)
 
-### Clients Table
-- Company information
-- Business preferences
+### Members Table
+- Personal information
+- Skills and interests
 - Verification status
 
-### Architects Table
-- Professional information (license, experience, specializations)
-- Portfolio and social links
+### Organizations Table
+- Organization information (name, description, mission)
+- Contact and location details
 - Verification status and rating
 
-### Projects Table
-- Project details (title, description, budget, deadline)
-- Client and assigned architect
+### Opportunities Table
+- Opportunity details (title, description, requirements, deadline)
+- Organization and assigned members
 - Status and category
 
-### Proposals Table
-- Architect proposals for projects
-- Budget and timeline estimates
+### Applications Table
+- Member applications for opportunities
+- Skills and motivation
 - Status (pending, accepted, rejected)
 
 ### Categories Table
-- Project categories (Residential, Commercial, etc.)
+- Opportunity categories (Education, Environment, Health, etc.)
 - Icons and colors for UI
 
 ## 🧪 Testing
@@ -164,13 +164,13 @@ Authorization: Bearer {your-token}
 After seeding, the following users are available:
 
 **Admin**
-- Email: `admin@arshipristige.com`
+- Email: `admin@platformpro.com`
 - Password: `admin123`
 
 **Test Users**
 - Email: `admin@example.com` / Password: `password`
-- Email: `architect@example.com` / Password: `password`
-- Email: `client@example.com` / Password: `password`
+- Email: `organization@example.com` / Password: `password`
+- Email: `member@example.com` / Password: `password`
 
 ## 🔧 Development
 
